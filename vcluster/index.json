@@ -6,8 +6,15 @@
       "title": "Intro",
       "text": "intro/readme.md",
       "foreground": "intro/verify-k3s.sh",
-      "backgroud": "intro/install-k3s.sh"
-    }
+      "background": "intro/install-k3s.sh"
+    },
+    "steps":[
+      {
+        "title": "First vcluster",
+        "text": "step1/readme.md",
+        "verify": "step1/verify.sh"
+      }
+    ]
   },
   "backend": {
     "imageid": "ubuntu"
