@@ -1,6 +1,14 @@
 {
   "title": "vCluster introduction",
   "description": "",
+  "details": {
+    "intro":{
+      "title": "Intro",
+      "text": "intro/readme.md",
+      "forground": "intro/install-k3s.sh",
+      "backgroud": "intro/verify-k3s.sh"
+    }
+  },
   "backend": {
     "imageid": "ubuntu"
   },
