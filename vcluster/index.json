@@ -11,8 +11,5 @@
   },
   "backend": {
     "imageid": "ubuntu"
-  },
-  "interface": {
-    "layout": "ide"
   }
 }
