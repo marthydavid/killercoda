@@ -1,0 +1,10 @@
+{
+  "title": "vCluster introduction",
+  "description": "",
+  "backend": {
+    "imageid": "ubuntu"
+  },
+  "interface": {
+    "layout": "ide"
+  }
+}
