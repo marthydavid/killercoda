@@ -17,32 +17,58 @@ cat > /etc/rancher/k3s/config.yaml <<EOF
 write-kubeconfig-mode: "0644"
 disable:
   - traefik
+  - servicelb
 EOF
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --cluster-init" INSTALL_K3S_VERSION=${k3s_version} sh -
 cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
-cat > /var/lib/rancher/k3s/server/manifests/00-ingress-nginx-helmchart.yaml <<EOF
+chmod 0600 /root/.kube/config
+cat > /var/lib/rancher/k3s/server/manifests/03-nullserv-helmchart.yaml <<EOF
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nullserv
+  namespace: default
+spec:
+  repo: https://k8s-at-home.com/charts/
+  chart: nullserv
+  set:
+    global.systemDefaultRegistry: ""
+EOF
+
+cat > /var/lib/rancher/k3s/server/manifests/00-metallb-helmchart.yaml <<EOF
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ingress-nginx
+  name: metallb-system
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: ingress-nginx
-  namespace: ingress-nginx
+  name: metallb
+  namespace: metallb-system
 spec:
-  repo: https://kubernetes.github.io/ingress-nginx
-  chart: ingress-nginx
+  repo: https://metallb.github.io/metallb
+  chart: metallb
   set:
     global.systemDefaultRegistry: ""
-  valuesContent: |-
-    controller:
-      kind: DaemonSet
-      ingressClassResource:
-        default: true
-      hostNetwork: true
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 198.51.100.0/24
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
 EOF
-

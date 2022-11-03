@@ -23,6 +23,11 @@
         "title": "Install cert-manager",
         "text": "step3/readme.md",
         "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Install 2nd vcluster",
+        "text": "step4/readme.md",
+        "verify": "step4/verify.sh"
       }
     ]
   },
