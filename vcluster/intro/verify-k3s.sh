@@ -1,3 +1,4 @@
 echo waiting for k3s installation to finish
-while [ ! -f /var/lib/rancher/k3s/server/manifests/00-metallb-helmchart.yaml ]; do sleep 1; done
-echo K3s installed and should run
+while [ ! -f /usr/local/bin/kubectl ]; do sleep 1; done
+kubectl -n metallb-system wait --for condition=Available=True deployment/metallb-controller --timeout=120s
+echo K3s and other components installed and should run

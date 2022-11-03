@@ -28,6 +28,11 @@
         "title": "Install 2nd vcluster",
         "text": "step4/readme.md",
         "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Install ingress-nginx and others",
+        "text": "step5/readme.md",
+        "verify": "step5/verify.sh"
       }
     ]
   },
