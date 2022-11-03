@@ -23,18 +23,6 @@ EOF
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --cluster-init" INSTALL_K3S_VERSION=${k3s_version} sh -
 cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 chmod 0600 /root/.kube/config
-cat > /var/lib/rancher/k3s/server/manifests/03-nullserv-helmchart.yaml <<EOF
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
-metadata:
-  name: nullserv
-  namespace: default
-spec:
-  repo: https://k8s-at-home.com/charts/
-  chart: nullserv
-  set:
-    global.systemDefaultRegistry: ""
-EOF
 
 cat > /var/lib/rancher/k3s/server/manifests/00-metallb-helmchart.yaml <<EOF
 ---
