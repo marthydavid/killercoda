@@ -13,6 +13,16 @@
         "title": "First vcluster",
         "text": "step1/readme.md",
         "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Access vcluster",
+        "text": "step2/readme.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Install cert-manager",
+        "text": "step3/readme.md",
+        "verify": "step3/verify.sh"
       }
     ]
   },

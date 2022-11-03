@@ -1,4 +1,6 @@
 #!/bin/bash
 
-kubectl get ns vcluster-test
-until kubectl --namespace vcluster-test get svc/test  --output=jsonpath='{.status.loadBalancer}' | grep "ingress"; do : ; done
+export KUBECONFIG=/root/.kube/config
+
+kubectl --context default get ns vcluster-test
+kubectl --context default wait --for=condition=ready -n vcluster-test pod/nginx-x-default-x-test
