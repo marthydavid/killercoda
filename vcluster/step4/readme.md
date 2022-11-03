@@ -16,17 +16,21 @@ vcluster disconnect
 kubectl cluster-info
 ```{{exec}}
 
+
+## Create cluster with different k8s version
+
 ```
-vcluster create test-v1-20 --kubernetes-version v1.20
+vcluster create test-v1-20 --kubernetes-version v1.20 --expose
 ```{{exec}}
 
 
-Open a new terminal:
+Check server version
 
 ```
-export KUBECONFIG=/root/.kube/config
 kubectl version -oyaml
 ```{{exec}}
+
+Check host cluster version
 
 ```
 kubectl --context default version -oyaml

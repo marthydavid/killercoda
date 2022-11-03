@@ -1,15 +1,43 @@
-Access the first vcluster
+# Access the first vcluster
 
-`export KUBECONFIG=$HOME/.kube/config`{{exec}}
+## Set the correct kubeconfig
 
-See cluster info before vcluster access
-`kubectl cluster-info`{{exec}}
+With k3s the default would be `/etc/rancher/k3s/k3s.yaml` but we don't want to interfer with that.
 
-`vcluster connect test`{{exec}}
+```
+export KUBECONFIG=$HOME/.kube/config
+```{{exec}}
 
-And after vcluster access
-`kubectl cluster-info`{{exec}}
+## See cluster info before vcluster access
 
-Run workload on vcluster
+```
+kubectl cluster-info
+```{{exec}}
 
-`kubectl run nginx --image=nginx`{{exec}}
+## Connect to the created cluster
+
+```
+vcluster connect test
+```{{exec}}
+
+## Query cluster info
+
+```
+kubectl cluster-info
+```{{exec}}
+
+## Run workload on vcluster
+
+```
+kubectl run nginx --image=nginx
+```{{exec}}
+
+```
+kubectl get pods
+```{{exec}}
+
+## Check this pod from host cluster perspective
+
+```
+kubectl --context default --namespace vcluster-test get pods
+```{{exec}}

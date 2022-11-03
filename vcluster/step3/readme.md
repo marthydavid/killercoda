@@ -1,24 +1,35 @@
 # Install cluster wide resources
 
-Configure kubeconfig:
-`export KUBECONFIG=$HOME/.kube/config`{{exec}}
+## Configure kubeconfig:
 
-Check current-context
+```
+export KUBECONFIG=$HOME/.kube/config
+```{{exec}}
 
-`kubectl config current-context`{{exec}}
+## Check current-context
+
+```
+kubectl config current-context
+```{{exec}}
 
 It should show: `vcluster_test_vcluster-test_default`
 
 ## Install cert-manager:
+
+Add repo
 
 ```
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 ```{{exec}}
 
+Create the crds before chart installation
+
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
 ```{{exec}}
+
+Check installed crds
 
 ```
 kubectl get crds|grep cert-manager
