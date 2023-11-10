@@ -24,6 +24,19 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --cluster-init" INSTALL_
 cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 chmod 0600 /root/.kube/config
 
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  KREW="krew-${OS}_${ARCH}" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxvf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+echo -n 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> /etc/bash.bashrc
+echo -n 'export KUBECONFIG=/root/.kube/config' >> /etc/bash.bashrc
+kubectl krew install ctx ns
+
 cat > /var/lib/rancher/k3s/server/manifests/00-metallb-helmchart.yaml <<EOF
 ---
 apiVersion: v1
@@ -50,6 +63,7 @@ metadata:
 spec:
   addresses:
   - 198.51.100.0/24
+  avoidBuggyIPs: true
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
