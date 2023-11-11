@@ -1,0 +1,22 @@
+{
+  "title": "Keda Demo",
+  "description": "Demo with Kafka + Keda",
+  "details": {
+    "intro":{
+      "title": "Intro",
+      "text": "intro/readme.md",
+      "foreground": "intro/verify.sh",
+      "background": "intro/install-tools.sh"
+    },
+    "steps": [
+      {
+        "title": "Dummy",
+        "text": "step1/readme.md",
+        "verify": "step1/verify.sh"
+      }
+    ]
+  },
+  "backend": {
+    "imageid": "ubuntu-4GB"
+  }
+}
