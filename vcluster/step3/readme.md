@@ -26,7 +26,7 @@ helm repo update
 Create the crds before chart installation
 
 ```
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.crds.yaml
 ```{{exec}}
 
 Check installed crds
@@ -49,7 +49,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.10.0
+  --version v1.18.2
 ```{{exec}}
 
 Check running pods:
