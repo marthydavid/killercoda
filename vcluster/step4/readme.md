@@ -20,7 +20,7 @@ kubectl cluster-info
 ## Create cluster with different k8s version
 
 ```
-vcluster create test-v1-20 --kubernetes-version v1.20 --expose
+vcluster create test-v1-28 --kubernetes-version v1.28 --expose
 ```{{exec}}
 
 
