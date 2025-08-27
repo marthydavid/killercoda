@@ -1,7 +1,7 @@
 set -x
 echo starting...
 
-k3s_version="v1.28.3+k3s2"
+k3s_version="v1.33.4+k3s1"
 
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
